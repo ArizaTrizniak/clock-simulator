@@ -1,0 +1,19 @@
+.clockHandMinute {
+    position: absolute;
+    background-color: red;
+    transform-origin: bottom;
+    border-radius: 5px 5px 1px 1px;
+    cursor: grab;
+}
+
+.clockHandHour {
+    position: absolute;
+    background-color: green;
+    transform-origin: bottom;
+    border-radius: 10px 10px 1px 1px;
+    cursor: grab;
+}
+
+.clockHandHour:active {
+    background-color: orange;
+}
