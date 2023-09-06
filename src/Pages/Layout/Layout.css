@@ -1,0 +1,12 @@
+.Layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    background-color: lightblue;
+}
+.Layout nav {
+    background-color: white;
+    width: 100%;
+}

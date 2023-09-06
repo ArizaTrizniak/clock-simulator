@@ -1,13 +1,14 @@
 import React from 'react';
 import ClockHand from './ClockHand';
-import {CLOCK_HAND_MINUTE_LENGTH, CLOCK_HAND_MINUTE_WIDTH} from '../../const';
+import {CLOCK_HAND_MINUTE_WIDTH} from '../../const';
 
 export interface MinuteClockHandProps{
     minute: number;
     setMinute: (minute: number) => void;
+    clockSize: number;
 }
 
-const MinuteClockHand: React.FC<MinuteClockHandProps> = ({ minute,setMinute}) => {
+const MinuteClockHand: React.FC<MinuteClockHandProps> = ({ minute,setMinute, clockSize}) => {
 
     function MinuteToRotation (minute: number) {
         return minute * 6;
@@ -19,11 +20,13 @@ const MinuteClockHand: React.FC<MinuteClockHandProps> = ({ minute,setMinute}) =>
 
     return (
         <ClockHand
-            length={CLOCK_HAND_MINUTE_LENGTH}
+            length={clockSize/2 * 0.8}
             width={CLOCK_HAND_MINUTE_WIDTH}
             rotation={MinuteToRotation(minute)}
             setRotation={RotationToMinute}
-            type={"Minute"}/>
+            type={"Minute"}
+            clockSize={clockSize}
+        />
     )
 };
 

@@ -1,19 +1,22 @@
 import React, {useRef, useEffect} from 'react';
 import './ClockFace.css';
-import {CLOCK_RADIUS, CLOCK_SIZE} from '../../const';
 
-const ClockFace: React.FC = () => {
+export interface ClockFaceProps {
+    clockSize: number;
+}
+const ClockFace: React.FC<ClockFaceProps> = ({clockSize}) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const canvasCtxRef = React.useRef<CanvasRenderingContext2D | null>(null);
+    const clockRadius= clockSize / 2;
 
     useEffect(() => {
         if (canvasRef.current) {
             canvasCtxRef.current = canvasRef.current.getContext('2d');
             let ctx = canvasCtxRef.current;
             if (ctx) {
-                const xCenterClock = CLOCK_RADIUS;
-                const yCenterClock = CLOCK_RADIUS;
-                const radiusNum = CLOCK_RADIUS - 10;
+                const xCenterClock = clockRadius;
+                const yCenterClock = clockRadius;
+                const radiusNum = clockRadius - 10;
 
                 let radiusPoint;
                 for (let tm = 0; tm < 60; tm++) {
@@ -45,12 +48,12 @@ const ClockFace: React.FC = () => {
                 }
             }
         }
-    }, []);
+    }, [clockSize, clockRadius]);
 
     return <canvas
         className="canvas"
-        height={CLOCK_SIZE}
-        width={CLOCK_SIZE}
+        height={clockSize}
+        width={clockSize}
         ref={canvasRef}/>
 }
 

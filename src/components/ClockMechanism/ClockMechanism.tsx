@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './ClockMechanism.css';
 import ClockFace from './ClockFace/ClockFace';
 import {ClockProps} from '../types';
-import {CLOCK_RADIUS} from '../const';
+import {CLOCK_SIZE} from '../const';
 import HourClockHand from './ClockHand/HourClockHand';
 import MinuteClockHand from './ClockHand/MinuteClockHand';
 
 const ClockMechanism: React.FC<ClockProps> = ({time, onSetTime}) => {
+
+    const [size, setSize] = useState(CLOCK_SIZE);
+    useEffect(() => {
+        const handleResize = () => {
+            setSize(Math.min(window.innerWidth, window.innerHeight) * 0.8);
+            console.log(Math.min(window.innerWidth, window.innerHeight))
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     const handleDragExit = (event: React.DragEvent<HTMLDivElement>) => {
         event.stopPropagation();
         event.preventDefault();
@@ -32,17 +45,22 @@ const ClockMechanism: React.FC<ClockProps> = ({time, onSetTime}) => {
 
     return (
         <div className="clockMechanism"
+             style={{
+                 height: `${size}px`,
+                 width: `${size}px`,
+             }}
              onDragOver={handleDragOver}
              onDragEnter={handleDragEnter}
              onDragExit={handleDragExit}>
-            <ClockFace/>
-            <MinuteClockHand minute={time.minutes} setMinute={setMinute}/>
-            <HourClockHand hour={time.hours} setHour={setHour}/>
+            <ClockFace clockSize={size}/>
+            <MinuteClockHand minute={time.minutes} setMinute={setMinute} clockSize={size}/>
+            <HourClockHand hour={time.hours} setHour={setHour} clockSize={size}/>
+
             <div
                 className="clockCenter"
                 style={{
-                    left: `${CLOCK_RADIUS - 10}px`,
-                    top: `${CLOCK_RADIUS - 10}px`,
+                    left: `${size / 2 - 10}px`,
+                    top: `${size / 2 - 10}px`,
                 }}
             ></div>
         </div>

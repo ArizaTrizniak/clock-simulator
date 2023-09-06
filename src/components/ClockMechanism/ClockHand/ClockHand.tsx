@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './ClockHand.css';
 import classNames from 'classnames';
-import {CLOCK_RADIUS} from '../../const';
 
 export interface ClockHandProps {
     length: number;
@@ -9,11 +8,13 @@ export interface ClockHandProps {
     rotation: number;
     setRotation: (rotation: number) => void;
     type: 'Hour' | 'Minute';
+    clockSize: number;
 }
 
-const ClockHand: React.FC<ClockHandProps> = ({length, width, rotation, setRotation, type}) => {
+const ClockHand: React.FC<ClockHandProps> = ({length, width, rotation, setRotation, type, clockSize}) => {
 
     const [currentRotation, setCurrentRotation] = useState(rotation);
+    const CLOCK_RADIUS = clockSize / 2;
     useEffect(() => {
         setCurrentRotation(rotation);
     }, [rotation]);
