@@ -1,13 +1,6 @@
 .clockMechanism {
     position: relative;
-    border: 1px solid #000;
+    border: 0.4rem solid #006eff;
     border-radius: 50%;
-}
-
-.clockCenter {
-    position: absolute;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: black;
+    background-color: #ffee00;
 }

@@ -1,29 +1,31 @@
-import React, {useState} from 'react';
-import MechanicalClock from '../../components/MechanicalClock';
-import ElectronicClock from '../../components/ElectronicClock';
-import ResultPopup from '../../components/ResultPopup';
-import ScoreCounter from '../../components/ScoreCounter';
+import React, {useState, useEffect} from 'react';
+import MechanicalClock from '../../components/MechanicalClock/MechanicalClock';
+import ResultPopup from '../../components/ResultPopup/ResultPopup';
+import ScoreCounter from '../../components/ScoreCounter/ScoreCounter';
+import {checkTimeMatch, generateRandomTime, Time} from '../../utils/utils';
 import './Game1.css';
-import {checkTimeMatch, generateRandomTime, Time, to12HourTime} from "../../utils/utils";
-import {Link} from "react-router-dom";
 
 const Game1: React.FC = () => {
     const InitialTimeMechanical:Time = { hours: 0, minutes: 0, period: 'AM' };
-    const InitialTimeElectronic:Time = { hours: 0, minutes: 0 };
+    const InitialTimeOrigin:Time = { hours: 0, minutes: 0 };
     const [mechanicalTime, setMechanicalTime] = useState(InitialTimeMechanical);
-    const [electronicTime, setElectronicTime] = useState(InitialTimeElectronic);
+    const [originTime, setOriginTime] = useState(InitialTimeOrigin);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [match, setMatch] = useState(false);
 
-    const handleStart = () => {
-        const randomTime:Time = generateRandomTime();
-        setMechanicalTime(to12HourTime(randomTime));
-        setElectronicTime(randomTime);
+    useEffect(() => {
+        Update();
+      }, []);
+
+    const Update = () => {
+        const randomTime: Time = generateRandomTime();
+        setOriginTime(randomTime);
+
     };
 
     const handleCheck = () => {
-        const match = checkTimeMatch(mechanicalTime, electronicTime);
+        const match = checkTimeMatch(mechanicalTime, originTime);
         setMatch(match);
         setShowResult(true);
         if (match) {
@@ -34,17 +36,18 @@ const Game1: React.FC = () => {
 
     const handleCloseResult = () => {
         setShowResult(false);
+        Update();
     };
 
     return (
         <div className="Game_1">
             <MechanicalClock time={mechanicalTime} onSetTime={setMechanicalTime} />
-          {/*  <ElectronicClock time={electronicTime} setTime={setElectronicTime} />*/}
-{/*            <button onClick={handleStart}>Start</button>
-            <button onClick={handleCheck}>Check</button>
-            {showResult && <ResultPopup match={match} onClose={handleCloseResult} />}
-            <ScoreCounter score={score} />
-            <Link to="/">MainMenu</Link>*/}
+            <div className='GamePanel'>
+                <h1>Set the clock to <span>{`${originTime.hours}:${originTime.minutes}`}</span></h1>
+                {!showResult && <button onClick={handleCheck} className='ButtonCheck'>Check</button>}
+                {showResult && <ResultPopup match={match} onClose={handleCloseResult} />}
+                <ScoreCounter score={score} />
+            </div>
         </div>
     );
 }

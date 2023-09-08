@@ -1,19 +1,33 @@
-.clockHandMinute {
+.ClockHandMinute {
     position: absolute;
-    background-color: red;
-    transform-origin: bottom;
-    border-radius: 5px 5px 1px 1px;
-    cursor: grab;
-}
-
-.clockHandHour {
-    position: absolute;
-    background-color: green;
+    background-color: #006eff;
     transform-origin: bottom;
     border-radius: 10px 10px 1px 1px;
     cursor: grab;
+    z-index: 20;
 }
 
-.clockHandHour:active {
+.ClockHandHour {
+    position: absolute;
+    background-color: red;
+    transform-origin: bottom;
+    border-radius: 10px 10px 1px 1px;
+    cursor: grab;
+    z-index: 30;
+    
+}
+
+.ClockHandHour:active {
     background-color: orange;
+}
+
+.TextOnHand {
+    color: white;
+    transform: rotate(-180deg);
+    display: inline;
+    position: absolute;
+    z-index: 2;
+    top: 20px;
+    left: -2px;
+    writing-mode: vertical-lr;
 }

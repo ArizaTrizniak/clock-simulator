@@ -1,6 +1,5 @@
 import React from 'react';
 import ClockHand from './ClockHand';
-import {CLOCK_HAND_HOUR_WIDTH} from '../../const';
 
 export interface HourClockHandProps{
     hour: number;
@@ -21,7 +20,6 @@ const HourClockHand: React.FC<HourClockHandProps> = ({ hour, setHour, clockSize}
     return (
         <ClockHand
             length={clockSize/2 * 0.5}
-            width={CLOCK_HAND_HOUR_WIDTH}
             rotation={HourToRotation(hour)}
             setRotation={RotationToHour}
             type={"Hour"}

@@ -1,0 +1,28 @@
+.Wrapper {
+    width: 100%;
+    align-items: center;
+}
+.Success {
+    color: green;
+    width: 100%;
+    border: 1px solid green;
+    background-color: #d8f7d8;
+    text-align: center;
+}
+.Failure {
+    color: red;
+    width: 100%;
+    border: 1px solid red;
+    background-color: #f7d8d8;
+    text-align: center;
+}
+.Close {
+    color: hsl(54, 100%, 50%);
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1em;
+    border:  none;
+    background-color: transparent;
+}

@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import './ClockHand.css';
 import classNames from 'classnames';
+import './ClockHand.css';
+import {getHandParams} from '../../../utils/elementsSizeGenerator';
 
 export interface ClockHandProps {
     length: number;
-    width: number;
     rotation: number;
     setRotation: (rotation: number) => void;
     type: 'Hour' | 'Minute';
     clockSize: number;
 }
 
-const ClockHand: React.FC<ClockHandProps> = ({length, width, rotation, setRotation, type, clockSize}) => {
+const ClockHand: React.FC<ClockHandProps> = ({length, rotation, setRotation, type, clockSize}) => {
 
     const [currentRotation, setCurrentRotation] = useState(rotation);
     const CLOCK_RADIUS = clockSize / 2;
@@ -49,26 +49,31 @@ const ClockHand: React.FC<ClockHandProps> = ({length, width, rotation, setRotati
 
     const dragEndHandle = (event: React.MouseEvent) => {
         const element = event.currentTarget;
-        element.className = classNames("clockHand" + type);
+        element.className = classNames("ClockHand" + type);
         rotateHandle(event);
         setRotation(currentRotation);
     }
 
+    const param = getHandParams(clockSize);
+
+
     return (
         <>
             <div
-                className={`clockHand${type}`}
+                className={`ClockHand${type}`}
                 style={{
                     height: `${length}px`,
-                    width: `${width}px`,
-                    left: `${(CLOCK_RADIUS - width / 2)}px`,
+                    width: `${param.width}px`,
+                    left: `${(CLOCK_RADIUS - param.width / 2)}px`,
                     bottom: `${CLOCK_RADIUS}px`,
                     transform: `rotate(${currentRotation}deg)`,
                 }}
                 onDragStart={dragStartHandle}
                 onDrag={dragHandle}
                 onDragEnd={dragEndHandle}
-            ></div>
+            >
+                {param.isTextVisible && <div className='TextOnHand'>{type}</div>}
+            </div>
         </>
     );
 }

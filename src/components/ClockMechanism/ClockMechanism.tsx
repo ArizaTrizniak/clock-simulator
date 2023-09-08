@@ -1,24 +1,14 @@
-import React, {useEffect, useState} from 'react';
 import './ClockMechanism.css';
 import ClockFace from './ClockFace/ClockFace';
 import {ClockProps} from '../types';
-import {CLOCK_SIZE} from '../const';
 import HourClockHand from './ClockHand/HourClockHand';
 import MinuteClockHand from './ClockHand/MinuteClockHand';
+import useResize from '../../hooks/useResize';
+import ClockCenter from './ClockCenter/ClockCenter';
 
 const ClockMechanism: React.FC<ClockProps> = ({time, onSetTime}) => {
 
-    const [size, setSize] = useState(CLOCK_SIZE);
-    useEffect(() => {
-        const handleResize = () => {
-            setSize(Math.min(window.innerWidth, window.innerHeight) * 0.8);
-            console.log(Math.min(window.innerWidth, window.innerHeight))
-        };
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    const {size} = useResize();
 
     const handleDragExit = (event: React.DragEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -55,14 +45,7 @@ const ClockMechanism: React.FC<ClockProps> = ({time, onSetTime}) => {
             <ClockFace clockSize={size}/>
             <MinuteClockHand minute={time.minutes} setMinute={setMinute} clockSize={size}/>
             <HourClockHand hour={time.hours} setHour={setHour} clockSize={size}/>
-
-            <div
-                className="clockCenter"
-                style={{
-                    left: `${size / 2 - 10}px`,
-                    top: `${size / 2 - 10}px`,
-                }}
-            ></div>
+            <ClockCenter clockSize={size}/>
         </div>
     );
 }

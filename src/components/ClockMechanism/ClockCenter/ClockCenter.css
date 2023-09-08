@@ -1,0 +1,6 @@
+.ClockCenter {
+    position: absolute;
+    border-radius: 50%;
+    background-color: black;
+    z-index: 200;
+}

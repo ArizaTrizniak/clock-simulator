@@ -1,0 +1,30 @@
+.Game_1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+.GamePanel {
+    padding: 2em;
+}
+.GamePanel h1 {
+    color: #006eff;
+}
+
+.GamePanel h1 span{
+    color: red;
+}
+
+.ButtonCheck {
+    background-color: #006eff;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 1em;
+}

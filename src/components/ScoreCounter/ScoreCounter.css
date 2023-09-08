@@ -1,0 +1,8 @@
+.ScoreCounter {
+    margin: 1em;
+}
+.ScoreCounter span {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: red;
+}

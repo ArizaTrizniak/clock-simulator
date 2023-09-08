@@ -5,8 +5,8 @@ import './MainMenu.css';
 const MainMenu: React.FC = () => {
   return (
     <div className="Wrapper">
-        <Link to="/game1" className="Link">Game1</Link>
-        <Link to="/game1" className="Link">Game1</Link>
+        <Link to="/game1" className="Link">Set the clock to the specified time </Link>
+        <Link to="/game2" className="Link">Set the clock to the specified time</Link>
         <Outlet />
     </div>
   );
